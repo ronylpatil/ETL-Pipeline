@@ -1,3 +1,4 @@
+import pathlib
 import typing
 import pandas as pd
 
@@ -34,13 +35,11 @@ def preprocessing(df: pd.DataFrame) -> pd.DataFrame:
 
     # drop the rows where
     #       - trip_distance = 0
-    #       - trip_duration = 0
     #       - total_amount = 0
     #       - passenger_count = 0
     df.drop(df.loc[df["trip_distance"] == 0].index, inplace=True)
-    df.drop(df.loc[df["trip_duration"] == 0].index, inplace=True)
     df.drop(df.loc[df["total_amount"] == 0].index, inplace=True)
-    df.drop(df.loc[df["passanger_count"] == 0].index, inplace=True)
+    df.drop(df.loc[df["passenger_count"] == 0].index, inplace=True)
 
     df["trip_duration"] = df.apply(
         lambda x: calculate_trip_duration(
@@ -48,13 +47,16 @@ def preprocessing(df: pd.DataFrame) -> pd.DataFrame:
         ),
         axis=1,
     )
+    
+    # drop the rows where trip_duration = 0
+    df.drop(df.loc[df["trip_duration"] == 0].index, inplace=True)
 
     df["speed"] = df.apply(
         lambda x: calculate_speed(x["trip_distance"], x["trip_duration"]), axis=1
     )
 
     df["cost_per_mile"] = df.apply(
-        lambda x: feature_cost_per_mile(x["total_amount"], x["trip_distance"]), axis=1
+        lambda x: calculate_cost_per_mile(x["total_amount"], x["trip_distance"]), axis=1
     )
 
     df["cost_per_passanger"] = df.apply(
@@ -67,3 +69,19 @@ def preprocessing(df: pd.DataFrame) -> pd.DataFrame:
     )
 
     return df
+
+
+if __name__ == "__main__":
+
+    curr_dir = pathlib.Path(__file__)
+    home_dir = curr_dir.parent.parent.parent.as_posix()
+    data_dir = pathlib.Path(f'{home_dir}/data/external/yellow_tripdata_2019-01.parquet')
+    processed_data_dir = pathlib.Path(f'{home_dir}/data/processed/yellow_processed_2019-01.csv')
+    
+    df = pd.read_parquet(data_dir).iloc[:1000000,:]
+    
+    try:
+        processed_data = preprocessing(df)
+        processed_data.to_csv(processed_data_dir, index = False)
+    except Exception as e : 
+        print(f'Failed to preprocess the data.\n{e}')
