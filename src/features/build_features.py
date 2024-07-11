@@ -47,7 +47,7 @@ def preprocessing(df: pd.DataFrame) -> pd.DataFrame:
         ),
         axis=1,
     )
-    
+
     # drop the rows where trip_duration = 0
     df.drop(df.loc[df["trip_duration"] == 0].index, inplace=True)
 
@@ -75,13 +75,15 @@ if __name__ == "__main__":
 
     curr_dir = pathlib.Path(__file__)
     home_dir = curr_dir.parent.parent.parent.as_posix()
-    data_dir = pathlib.Path(f'{home_dir}/data/external/yellow_tripdata_2019-01.parquet')
-    processed_data_dir = pathlib.Path(f'{home_dir}/data/processed/yellow_processed_2019-01.csv')
-    
-    df = pd.read_parquet(data_dir).iloc[:1000000,:]
-    
+    data_dir = pathlib.Path(f"{home_dir}/data/external/yellow_tripdata_2019-01.parquet")
+    processed_data_dir = pathlib.Path(
+        f"{home_dir}/data/processed/yellow_processed_2019-01.csv"
+    )
+
+    df = pd.read_parquet(data_dir).iloc[:1000000, :]
+
     try:
         processed_data = preprocessing(df)
-        processed_data.to_csv(processed_data_dir, index = False)
-    except Exception as e : 
-        print(f'Failed to preprocess the data.\n{e}')
+        processed_data.to_csv(processed_data_dir, index=False)
+    except Exception as e:
+        print(f"Failed to preprocess the data.\n{e}")
