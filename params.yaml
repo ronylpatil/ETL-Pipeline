@@ -1,0 +1,8 @@
+base:
+  project_name: etl_task
+
+fetch_data:
+  chunk_size: 8192
+  year: '2019'
+  month: '01'
+  
