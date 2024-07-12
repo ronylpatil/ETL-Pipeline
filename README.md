@@ -3,6 +3,23 @@ ETL Pipeline
 
 ETL task from d2k tech
 
+## Description
+    ├── notebooks          <- Jupyter notebooks
+    ├── reports            
+    │   └── figures        <- EDA graphics and figures are here
+    ├── src                <- Source code for use in this project.
+    │   ├── __init__.py    <- Makes src a Python module
+    │   │
+    │   ├── data           
+    │   │   └── fetch_data.py   <- Script to fetch data from data source (https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+    │   │
+    │   ├── features       
+    │   │   └── build_features.py     <- Scripts to turn raw data into features
+    │   │
+    │   ├── load         
+    │   │   ├── load_data.py     <- Scripts to load data into SQLite database
+    │   │   └── SQLQuery.sql     <- SQL scripts to perform statistical analysis
+
 Project Structure
 ------------
 
@@ -10,7 +27,7 @@ Project Structure
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
-    │   ├── external       <- Data from third party sources
+    │   ├── external       <- Data from third-party sources
     │   ├── processed      <- The final, processed data for further usage.
     │   └── raw            <- The original, immutable data dump.
     │
