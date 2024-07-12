@@ -1,27 +1,22 @@
-etl_task
+ETL Pipeline
 ==============================
 
-etl task from d2k tech
+ETL task from d2k tech
 
-Project Organization
+Project Structure
 ------------
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
+    │   ├── external       <- Data from third party sources
+    │   ├── processed      <- The final, processed data for further usage.
     │   └── raw            <- The original, immutable data dump.
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
+    ├── notebooks          <- Jupyter notebooks.
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
@@ -35,16 +30,15 @@ Project Organization
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
     │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
+    │   ├── data           <- Script to fetch data from data source
+    │   │   └── fetch_data.py
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
+    │   ├── features       <- Scripts to turn raw data into features
     │   │   └── build_features.py
     │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
+    │   ├── load         <- Scripts to load data into database
+    │   │   ├── load_data.py
+    │   │   └── SQLQuery.sql <- SQL scripts to perform statistical analysis
     │   │
     │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
     │       └── visualize.py
