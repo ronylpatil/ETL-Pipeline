@@ -3,7 +3,7 @@ ETL Pipeline
 
 ETL task from d2k tech
 
-## Description
+## Core Codebase Structure
     ├── notebooks          <- Jupyter notebooks
     ├── reports            
     │   └── figures        <- EDA graphics and figures are here
@@ -20,7 +20,7 @@ ETL task from d2k tech
     │   │   ├── load_data.py     <- Scripts to load data into SQLite database
     │   │   └── SQLQuery.sql     <- SQL scripts to perform statistical analysis
 
-Project Structure
+Detailed Project Structure
 ------------
 
     ├── LICENSE
